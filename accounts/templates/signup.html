@@ -25,9 +25,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'portfolio' %}">Movie Poster</a>
-              <a class="dropdown-item" href="{% url 'signup' %}" tabindex="-1" aria-disabled="true">SIGN UP</a>
-              <a class="dropdown-item" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">LOGIN</a>
-              <a class="dropdown-item" href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">LOGOUT</a>
             </div>
           </li>
           <li class="nav-item">
@@ -40,20 +37,30 @@
         </form>
       </div>
     </nav>
-    <meta charset="utf-8">
-   
-    <title>CRUD 연습</title>
-    <style>
-        h1{
-            background-color: #B2EBF4;
-        }
-    </style>
-</head>
-    <div class="container">
-    <h1>Movie</h1>
-    
-    
-    <a href="{% url 'home' %}">Movie recommendation</a><br>
-    </div>
-<!doctype html>
-</html>
+
+{% block contents %}
+<div class="container">
+
+<h1>Sign Up</h1>
+
+<form method = "POST" action="{%url 'signup'%}">
+    {% csrf_token %}
+    Username:
+    <br>
+    <input name="username" type="text">
+    <br>
+    Password:
+    <br>
+    <input name="password1" type="password">
+    <br>
+    Confirm Password:
+    <br>
+    <input name="password2" type="password">
+    <br>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Sign Up">
+
+</form>
+</div>
+
+{% endblock %}

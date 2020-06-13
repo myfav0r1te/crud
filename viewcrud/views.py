@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from django.core.paginator import Paginator
 from .models import Blog
 from .forms import NewBlog
 
@@ -8,7 +9,11 @@ def welcome(request):
 
 def read(request):
     blogs = Blog.objects.all()
-    return render(request, 'viewcrud/funccrud.html', {'blogs': blogs})
+    blog_list = Blog.objects.all()
+    paginator = Paginator(blog_list, 2)
+    page = request.GET.get('page')
+    posts= paginator.get_page(page)
+    return render(request, 'viewcrud/funccrud.html', {'blogs': blogs, 'posts':posts})
 
 def create(request):
     if request.method == 'POST':
